@@ -21,8 +21,7 @@ function logClientInfo(req) {
 	req.socket.remoteAddress || // 判断后端的 socket 的 IP
 	req.connection.socket.remoteAddress;
 
-	logger.info("client ip: ", ip);
-	logger.info("client port: ", req.socket.remotePort);
+	logger.info("client ip: ", ip, " port: ", req.socket.remotePort);
 }
 
 http.createServer((req, res) => {
@@ -34,7 +33,7 @@ http.createServer((req, res) => {
 	opts.limit = opts.limit || '1mb';
 	const strict = opts.strict !== false;
 	raw(inflate(req), opts).then(str => {
-		logger.info(req);
+		// logger.info(req);
 		logger.info('-----------------------------------------------------');
 		logger.info([req.method, req.url, 'HTTP/' + req.httpVersion].join(' '));
 		logger.info(req.rawHeaders);
